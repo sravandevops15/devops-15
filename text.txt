@@ -1,7 +1,10 @@
- data to my file in repo
- omckc
- kdks
+These is my first file from the gitBash to window git bash
 
-mkdkdp
-ck,c;k
+for these i did again these steps
+
+1. git add filename this file
+
+2. git commit -m 'modified data'
+
+3. git push
 
