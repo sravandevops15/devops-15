@@ -1,3 +1,7 @@
-dd databto a file
- also checking in repo wheather it was added or not
+chages mad in the file
+For the first time i used git pull to know how changes are relflected to my loval gitbash
+
+also checking in repo wheather it was added or not
+
+
 
