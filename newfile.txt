@@ -3,5 +3,7 @@ For the first time i used git pull to know how changes are relflected to my loca
 
 now adding data from linux-server. previous when i was created this devops-15 it was it created in git bash -winows OS
 
+checking data is relfelcted ot=r not
+
 
 
