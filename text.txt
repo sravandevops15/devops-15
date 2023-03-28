@@ -8,5 +8,5 @@ for these i did again these steps
 
 3.   git push 
 
-#adding data
+done changes
 
