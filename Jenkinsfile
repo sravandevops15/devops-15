@@ -1,53 +1,50 @@
-def countinueotherstages = false
-pipeline{
+def StageName = ""
+pipeline {
     agent any
-    stages{
-        stage('build Name'){
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('maven-Build'){
             steps{
+                echo 'Maven BUILD'
                 script{
-                    currentBuild.displayName = "${BUILD_NUMBER}-${JOB_NAME}-${BUILD_ID}"
-                    currentBuild.description = "continue other stages if stage fails"
-                    
+                    StageName = "maven-Build"
                 }
-                 
+            }
+            post{
+                aborted{
+            emailext attachLog: true, body: 'Devops15 Report of this job $BUILD_NUMBER Failure occure Stage Name:${StageName}', compressLog: true, subject: 'Jenkins options testing :$JOB_NAME BuildNumber: $BUILD_NUMBER', to: 'sravanbunty.mj@gmail.com'
+             }
             }
         }
-        stage('stage1'){
+        stage("Email Notification"){
             steps{
+                echo 'enail.notification'
+                sh 'sleep 60s'
                 script{
-                    try{
-                        sh "echo stage1"
-                    } catch (Exception e){
-                        countinueotherstages = true
-                    }
-                    if(countinueotherstages){
-                        catchError(buildResult:'SUCCESS',stageResult:'FAILURE'){
-                            sh "exit 1"
-                        }
-                    }
+                    StageName = "Email Notification"
                 }
             }
-        }
-        stage('stage2'){
-            when {
-                expression{
-                    !countinueotherstages
-                }
-                
-            }
-            steps{
-                sh "echo stage2"
-            }
-        }
-        stage('stage3'){
-            when{
-                expression{
-                    countinueotherstages
-                }
-            }
-            steps{
-                echo "stage3"
+            post{
+                aborted{
+            emailext attachLog: true, body: 'Devops15 Report of this job $BUILD_NUMBER  Failure occure Stage Name:$StageName', compressLog: true, subject: 'Jenkins options testing :$JOB_NAME BuildNumber: $BUILD_NUMBER StageName:${StageName}', to: 'sravanbunty.mj@gmail.com'
+              }
             }
         }
     }
+    post{
+        fixed{
+            emailext attachLog: true, body: 'Devops15 Report of this job $BUILD_NUMBER', compressLog: true, subject: 'Jenkins options testing :$JOB_NAME BuildNumber: $BUILD_NUMBER', to: 'sravanbunty.mj@gmail.com'
+        }
+        aborted{
+            emailext attachLog: true, body: 'Devops15 Report of this job $BUILD_NUMBER', compressLog: true, subject: 'Jenkins options testing :$JOB_NAME BuildNumber: $BUILD_NUMBER', to: 'sravanbunty.mj@gmail.com'
+        }
+        success{
+            emailext attachLog: true, body: 'Devops15 Report of this job $BUILD_NUMBER', compressLog: true, subject: 'Jenkins options testing :$JOB_NAME BuildNumber: $BUILD_NUMBER', to: 'sravanbunty.mj@gmail.com'
+        }
+    }
 }
