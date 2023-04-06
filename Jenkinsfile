@@ -1,4 +1,4 @@
-def StageName = ""
+def stagename = ""
 pipeline {
     agent any
 
@@ -12,7 +12,7 @@ pipeline {
             steps{
                 echo 'Maven BUILD'
                 script{
-                    StageName = "maven-Build"
+                    stagename = "maven-Build"
                 }
             }
             post{
@@ -26,14 +26,17 @@ pipeline {
                 echo 'enail.notification'
                 sh 'sleep 60s'
                 script{
-                    StageName = "Email Notification"
+                    stagename = "Email Notification"
                 }
+                
             }
             post{
                 aborted{
-            emailext attachLog: true, body: 'Devops15 Report of this job $BUILD_NUMBER  Failure occure Stage Name:$StageName', compressLog: true, subject: 'Jenkins options testing :$JOB_NAME BuildNumber: $BUILD_NUMBER StageName:${StageName}', to: 'sravanbunty.mj@gmail.com'
+            emailext attachLog: true, body: 'Devops15 Report of this job $BUILD_NUMBER  Failure occure Stage Name:$stagename', compressLog: true, subject: 'Jenkins options testing :$JOB_NAME BuildNumber: $BUILD_NUMBER StageName:${stagename}', to: 'sravanbunty.mj@gmail.com'
               }
             }
+          
+            
         }
     }
     post{
@@ -45,6 +48,6 @@ pipeline {
         }
         success{
             emailext attachLog: true, body: 'Devops15 Report of this job $BUILD_NUMBER', compressLog: true, subject: 'Jenkins options testing :$JOB_NAME BuildNumber: $BUILD_NUMBER', to: 'sravanbunty.mj@gmail.com'
-        }
-    }
+        }
+    }
 }
