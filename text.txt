@@ -1,12 +1,7 @@
 These is my first file from the gitBash to window git bash
-
 for these i did again these steps
 
 1. git add <filename> this file
-
 2. it commit -m 'modified data'--> adding message
-
 3.   git push 
-
 done changes
-
