@@ -2,5 +2,4 @@ chages mad in the file
 For the first time i used git pull to know how changes are relflected to my local gitbash.
 
 now adding data from linux-server. previous when i was created this devops-15 it was it created in git bash -winows OS
-
 #now here teasting how git fetch going to be//hn
